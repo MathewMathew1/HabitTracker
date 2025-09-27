@@ -11,15 +11,15 @@ export const rateDailyPerformance = (
   let goodScore = 0;
   let maxGoodScore = 0;
 
-  userHabits.forEach((habit) => {
-    if (habit.habit.isPositive) {
-      const rating = grades[habit.habit.id] || 1;
-      goodScore += rating * habit.severity;
-      maxGoodScore += MAX_GRADE * habit.severity;
+  userHabits.forEach((userHabit) => {
+    if (userHabit.habit.isPositive) {
+      const rating = grades[userHabit.habit.id] || 1;
+      goodScore += rating * userHabit.severity;
+      maxGoodScore += MAX_GRADE * userHabit.severity;
     } else {
-      const rating = grades[habit.habit.id] || 1;
-      badScore += (rating - 1) * habit.severity;
-      maxBadScore += (MAX_GRADE - 1) * habit.severity;
+      const rating = grades[userHabit.habit.id] || 1;
+      badScore += (rating - 1) * userHabit.severity;
+      maxBadScore += (MAX_GRADE - 1) * userHabit.severity;
     }
   });
 
