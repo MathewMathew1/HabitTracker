@@ -1,5 +1,7 @@
 import { UserHabit } from '@/habits/types';
 
+const MAX_GRADE = 5
+
 export const rateDailyPerformance = (
   userHabits: UserHabit[],
   grades: Record<string, number>
@@ -13,11 +15,11 @@ export const rateDailyPerformance = (
     if (habit.habit.isPositive) {
       const rating = grades[habit.habit.id] || 1;
       goodScore += rating * habit.severity;
-      maxGoodScore += 5 * habit.severity;
+      maxGoodScore += MAX_GRADE * habit.severity;
     } else {
       const rating = grades[habit.habit.id] || 1;
       badScore += (rating - 1) * habit.severity;
-      maxBadScore += (5 - 1) * habit.severity;
+      maxBadScore += (MAX_GRADE - 1) * habit.severity;
     }
   });
 
