@@ -18,13 +18,13 @@ export const rateDailyPerformance = (
       maxGoodScore += MAX_GRADE * userHabit.severity;
     } else {
       const rating = grades[userHabit.habit.id] || 1;
-      badScore += (rating - 1) * userHabit.severity;
-      maxBadScore += (MAX_GRADE - 1) * userHabit.severity;
+      badScore += rating * userHabit.severity;
+      maxBadScore += MAX_GRADE * userHabit.severity;
     }
   });
 
   const maximumScore = maxGoodScore + maxBadScore;
-  const score = badScore + maxGoodScore - goodScore;
+  const score = -badScore + maxGoodScore - goodScore + maxBadScore;
   const percentageOfScore = score / maximumScore;
 
   const removedPoints = Math.round(10 * percentageOfScore);
