@@ -1,0 +1,11 @@
+<div class="flex flex-col gap-4 p-4 pt-2">
+  <div>
+    <app-search-filter (searchChange)="onSearchChange($event)"></app-search-filter>
+  </div>
+  <div>
+    <app-habit-list [habits]="filteredHabits"  (habitSelected)="addHabit($event)"></app-habit-list>
+  </div>
+  <div>
+    <app-user-habits (deleteHabit)="deleteUserHabit($event)" (saveRoutine)="saveRoutine($event)"  [userHabits]="userHabits" />
+  </div>
+</div>

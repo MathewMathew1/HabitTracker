@@ -1,0 +1,83 @@
+<div class="border rounded-lg p-3 mb-3 shadow-sm bg-white dark:bg-gray-800 transition-colors">
+  <button
+    class="font-semibold w-full text-left flex justify-between items-center mb-2"
+    (click)="toggleSpoiler()"
+  >
+    <span>Report - {{ report.date | date : 'shortDate' }}</span>
+    @if(!spoilerOpen()) {
+    <span>▼</span>
+    } @else {
+    <span>▲</span>
+    }
+  </button>
+
+  @if(spoilerOpen()) {
+
+  <div class="mb-3">
+    <label class="block font-medium text-sm mb-1">Note</label>
+    <textarea
+      placeholder="Describe what actions or circumstances helped you stick to your positive habits, and what led to lapses. Observing patterns can guide better choices in the future."
+      [(ngModel)]="note"
+      rows="3"
+      class="w-full p-1 text-sm border rounded bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+    ></textarea>
+  </div>
+  <div class="flex flex-col"> 
+    <div class="flex md:flex-row flex-col gap-2 justify-center">
+      @for(userHabit of report.userHabits; track userHabit.habit.id) {
+      <div
+        class="flex flex-col p-3 mb-3 border rounded-xl shadow-md bg-white dark:bg-gray-800 transition-colors"
+      >
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2 min-w-[120px]">
+            <span class="text-lg">{{ userHabit.habit.emoji }}</span>
+            <span class="text-sm font-medium">{{ userHabit.habit.name }}</span>
+          </div>
+
+          <div class="flex items-center">
+            <span class="text-sm font-semibold text-pink-600 dark:text-pink-400 w-12 text-center">
+              {{ userHabit.severity }}
+            </span>
+            <span class="text-xs text-gray-500 dark:text-gray-400">Importance</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col">
+          <label class="flex items-center justify-between text-sm font-medium mb-2">
+            <span>Grade your performance today</span>
+            <span class="group relative cursor-pointer text-gray-500 dark:text-gray-200">
+              ?
+              <span
+                class="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 w-48 text-xs bg-gray-900 text-white dark:bg-gray-500 dark:text-gray-700 p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                Move the slider from 1 (lowest) to 5 (highest) to rate how well you performed this
+                habit today.
+              </span>
+            </span>
+          </label>
+
+          <input
+            type="range"
+            min="1"
+            max="5"
+            step="1"
+            [(ngModel)]="grades()[userHabit.habit.id]"
+            (ngModelChange)="setGrade(userHabit.habit.id, $event)"
+            class="w-full h-2 rounded-full transition-colors"
+            [ngStyle]="{ accentColor: getRangeColor(grades()[userHabit.habit.id]) }"
+          />
+        </div>
+      </div>
+      }
+    </div>
+    <div class="flex justify-end mt-4">
+      <button
+        (click)="save()"
+        class="px-4 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-lg shadow transition-colors"
+      >
+        Save Report
+      </button>
+    </div>
+  </div>
+  }
+</div>

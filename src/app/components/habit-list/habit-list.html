@@ -1,0 +1,21 @@
+<div>
+  <div class="mb-6">
+    <h1 class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text 
+               bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500
+               drop-shadow-md text-center">
+      List of Habits
+    </h1>
+  </div>
+
+<div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
+            max-h-[500px] min-h-[200px] overflow-auto p-1 pr-4
+            backdrop-blur-md
+            rounded-lg
+            dark:backdrop-blur-md
+            bg-[rgba(245,232,255,0.5)] dark:bg-[rgba(31,41,55,0.3)]">
+  <app-habit-item *ngFor="let habit of habits" [habit]="habit" (selectHabit)="onHabitSelected($event)"></app-habit-item>
+</div>
+
+
+
+</div>

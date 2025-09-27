@@ -1,0 +1,185 @@
+<nav class="bg-white dark:bg-gray-900 shadow-md px-6 py-4 relative">
+  <div class="flex items-center justify-between">
+    <div
+      class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500"
+    >
+      Habit Tracker
+    </div>
+
+    <div class="hidden md:flex items-center space-x-4">
+      <a
+        routerLink="/"
+        routerLinkActive="text-pink-500 font-semibold"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="text-gray-800 dark:text-gray-100 hover:text-pink-500 transition-colors"
+        >Home</a
+      >
+
+      <a
+        routerLink="/tracker"
+        routerLinkActive="text-pink-500 font-semibold"
+        class="text-gray-800 dark:text-gray-100 hover:text-pink-500 transition-colors"
+        >Tracker</a
+      >
+
+      <a
+        routerLink="/reports"
+        routerLinkActive="text-pink-500 font-semibold"
+        class="text-gray-800 dark:text-gray-100 hover:text-pink-500 transition-colors relative"
+      >
+        Reports @if ((reportCount$ | async) ?? 0 > 0) {
+        <span
+          class="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full"
+        >
+          {{ reportCount$ | async }}
+        </span>
+        }
+      </a>
+      <a
+        routerLink="/daily-performance"
+        routerLinkActive="text-pink-500 font-semibold"
+        class="text-gray-800 dark:text-gray-100 hover:text-pink-500 transition-colors relative"
+      >
+        Daily Performance
+      </a>
+      
+      <button
+        (click)="theme.toggle()"
+        class="ml-4 w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow transition-transform hover:scale-110"
+        aria-label="Toggle dark mode"
+      >
+        @if(!darkMode()){
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 3v1m0 16v1m8.66-12.34l-.707.707M4.05 19.95l-.707.707M21 12h-1M4 12H3m16.66 4.34l-.707-.707M4.05 4.05l-.707-.707M12 7a5 5 0 100 10 5 5 0 000-10z"
+          />
+        </svg>
+        } @if(darkMode()){
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
+          />
+        </svg>
+        }
+      </button>
+    </div>
+
+    <div class="md:hidden">
+      <button (click)="mobileMenuOpen = !mobileMenuOpen" aria-label="Toggle menu">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-gray-800 dark:text-gray-100"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            *ngIf="!mobileMenuOpen"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+          <path
+            *ngIf="mobileMenuOpen"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  @if(mobileMenuOpen){
+  <div class="md:hidden mt-2 flex flex-col space-y-2">
+    <a
+      routerLink="/"
+      routerLinkActive="text-pink-500 font-semibold"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="text-gray-800 dark:text-gray-100 hover:text-pink-500 transition-colors"
+      >Home</a
+    >
+    <a
+      routerLink="/tracker"
+      routerLinkActive="text-pink-500 font-semibold"
+      class="text-gray-800 dark:text-gray-100 hover:text-pink-500 transition-colors"
+      >Tracker</a
+    >
+    <a
+      routerLink="/reports"
+      class="text-gray-800 dark:text-gray-100 hover:text-pink-500 transition-colors relative"
+    >
+      Reports @if ((reportCount$ | async) ?? 0 > 0) {
+      <span
+        class="absolute -top-2 -right-3 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full"
+      >
+        {{ reportCount$ | async }}
+      </span>
+      }
+    </a>
+    <a
+      routerLink="/daily-performance"
+      class="text-gray-800 dark:text-gray-100 hover:text-pink-500 transition-colors relative"
+    >
+      Daily Performance
+    </a>
+
+    <button
+      (click)="theme.toggle()"
+      class="ml-4 w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow transition-transform hover:scale-110"
+      aria-label="Toggle dark mode"
+    >
+      @if(!darkMode()){
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v1m0 16v1m8.66-12.34l-.707.707M4.05 19.95l-.707.707M21 12h-1M4 12H3m16.66 4.34l-.707-.707M4.05 4.05l-.707-.707M12 7a5 5 0 100 10 5 5 0 000-10z"
+        />
+      </svg>
+      } @if(darkMode()){
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
+        />
+      </svg>
+      }
+    </button>
+  </div>
+  }
+</nav>

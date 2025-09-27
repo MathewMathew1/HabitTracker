@@ -1,0 +1,44 @@
+<div
+  class="flex  items-center justify-between p-3 rounded-xl shadow bg-white dark:bg-gray-800 overflow-hidden"
+>
+  <div
+    class="transform transition-transform duration-200 hover:scale-101 w-full flex md:flex-row flex-col justify-between items-center"
+  >
+    <div class="flex items-center gap-3">
+      <span class="text-xl">{{ habit.habit.emoji }}</span>
+      <span class="font-medium text-gray-800 dark:text-gray-100">{{ habit.habit.name }}</span>
+    </div>
+
+    <div class="flex items-center gap-3 relative">
+      <label class="flex items-center gap-1 text-sm font-semibold text-gray-700 dark:text-gray-200">
+        <span
+          class="px-2 py-1 rounded-md bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 text-white shadow-md"
+        >
+          Importance
+        </span>
+      </label>
+
+      <input
+        type="range"
+        min="1"
+        max="3"
+        [value]="habit.severity"
+        (input)="onSeverityChange($event.target.valueAsNumber)"
+        class="w-24 accent-pink-500 dark:accent-purple-400"
+      />
+
+      <span class="w-5 text-center font-medium text-gray-800 dark:text-gray-200">{{
+        habit.severity
+      }}</span>
+
+      <button
+        *ngIf="showDeleteButton"
+        (click)="onDelete()"
+        class="ml-3 w-8 h-8 flex items-center justify-center rounded-full bg-red-100 dark:bg-red-700 text-red-600 dark:text-red-200 hover:bg-red-600 hover:text-white dark:hover:bg-red-400 shadow-md hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+        title="Delete habit"
+      >
+        ✖
+      </button>
+    </div>
+  </div>
+</div>

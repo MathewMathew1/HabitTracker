@@ -1,0 +1,21 @@
+<div
+  class="flex items-center justify-between p-4 mb-3 rounded-xl shadow-lg
+         transition-transform transform hover:scale-105
+         bg-gradient-to-r
+         text-white
+         hover:shadow-2xl select-none
+         cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+  [ngClass]="habit.isPositive
+    ? 'from-green-400 via-green-500 to-green-600 shadow-green-400/50'
+    : 'from-red-400 via-red-500 to-red-600 shadow-red-400/50'"
+  (click)="onClick()"
+  tabindex="0"
+  (keydown)="onKeyDown($event)"
+  role="button"
+  aria-label="Add habit {{ habit.name }}"
+>
+  <div class="flex items-center gap-3">
+    <span class="text-2xl">{{ habit.emoji }}</span>
+    <span class="font-semibold text-lg">{{ habit.name }}</span>
+  </div>
+</div>
